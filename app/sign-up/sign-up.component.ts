@@ -5,6 +5,7 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
+import { fadeInItems } from '@angular/material/menu/typings';
 import { CustomValidators } from '../custom-validator';
 import { FormErrorService } from '../form-error.service';
 
@@ -68,8 +69,18 @@ export class SignUpComponent implements OnInit {
   }
 
   getErros(a: any) {
-    console.log(this.signUpForm.get('name').errors);
+    console.log(this.signUpForm.get('name').errors['not_allowed_characters']);
 
-    return 'Teste';
+    const Erros = this.signUpForm.get('name').errors['not_allowed_characters'];
+
+    let caracteres = '';
+    if (Erros) {
+      Erros.map((item) => {
+        console.log(item);
+        caracteres += ` ${item}`;
+      });
+    }
+
+    return `Remove Isso: ${caracteres} !!!!`;
   }
 }
